@@ -21,10 +21,10 @@ export default function Navbar({ config }: NavbarProps) {
         <div className="flex justify-between items-center px-container-margin-mobile h-16 w-full max-w-7xl mx-auto md:px-12">
           {/* Logo & Gym Name */}
           <a href="#" className="flex items-center gap-2 group">
-            {config.logo && (config.logo.startsWith('http') || config.logo.startsWith('/') || config.logo.includes('.')) ? (
-              <img src={config.logo} alt={config.name} className="h-8 max-w-[120px] object-contain transition-transform group-hover:scale-105" />
+            {config.logo && (config.logo.startsWith('http') || config.logo.startsWith('/') || config.logo.includes('.') || config.logo.startsWith('data:image')) ? (
+              <img src={config.logo} alt={config.name} className="h-10 max-w-[140px] object-contain transition-transform group-hover:scale-105" />
             ) : (
-              <span className="material-symbols-outlined text-primary-fixed text-[32px] transition-transform group-hover:scale-110 group-hover:rotate-12" style={{ fontVariationSettings: "'FILL' 1" }}>
+              <span className="material-symbols-outlined text-primary-fixed text-[36px] transition-transform group-hover:scale-110 group-hover:rotate-12" style={{ fontVariationSettings: "'FILL' 1" }}>
                 {config.logo || 'bolt'}
               </span>
             )}

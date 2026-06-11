@@ -18,10 +18,10 @@ export default function Footer({ config }: FooterProps) {
       <div className="max-w-7xl mx-auto px-container-margin-mobile flex flex-col items-center text-center gap-6">
         {/* Brand Header */}
         <div className="flex items-center gap-2 mb-2">
-          {config.logo && (config.logo.startsWith('http') || config.logo.startsWith('/') || config.logo.includes('.')) ? (
-            <img src={config.logo} alt={config.name} className="h-8 max-w-[100px] object-contain" />
+          {config.logo && (config.logo.startsWith('http') || config.logo.startsWith('/') || config.logo.includes('.') || config.logo.startsWith('data:image')) ? (
+            <img src={config.logo} alt={config.name} className="h-12 max-w-[140px] object-contain" />
           ) : (
-            <span className="material-symbols-outlined text-primary-fixed text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            <span className="material-symbols-outlined text-primary-fixed text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>
               {config.logo || 'bolt'}
             </span>
           )}

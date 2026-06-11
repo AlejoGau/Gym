@@ -44,6 +44,24 @@ export default function Hero({ config }: HeroProps) {
         animate="visible"
         className="relative z-10 w-full max-w-7xl mx-auto px-container-margin-mobile md:px-12 flex flex-col items-start"
       >
+        {/* Brand Logo / Symbol */}
+        <motion.div variants={itemVariants} className="mb-6">
+          {config.logo && (config.logo.startsWith('http') || config.logo.startsWith('/') || config.logo.includes('.') || config.logo.startsWith('data:image')) ? (
+            <img 
+              src={config.logo} 
+              alt={config.name} 
+              className="h-16 md:h-20 max-w-[240px] object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]" 
+            />
+          ) : (
+            <span 
+              className="material-symbols-outlined text-primary-fixed text-[54px] md:text-[64px] drop-shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.35)]" 
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
+              {config.logo || 'bolt'}
+            </span>
+          )}
+        </motion.div>
+
         {/* Dynamic Promotion & Trust Badges */}
         <motion.div variants={itemVariants} className="flex flex-wrap gap-3 mb-6">
           <span className="bg-surface-variant/50 border border-primary-fixed/30 px-4 py-1.5 rounded-full text-primary-fixed text-label-md font-label-md flex items-center gap-1.5 backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
