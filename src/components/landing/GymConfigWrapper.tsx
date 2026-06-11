@@ -52,9 +52,9 @@ export default function GymConfigWrapper() {
       <Background3D config={config} />
 
       {/* 3D ambient light background blobs */}
-      <div className="absolute top-[10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-primary-fixed/5 blur-[120px] pointer-events-none animate-float-slow z-0"></div>
-      <div className="absolute top-[50%] right-[-15%] w-[45vw] h-[45vw] rounded-full bg-secondary-container/5 blur-[150px] pointer-events-none animate-float-reverse z-0"></div>
-      <div className="absolute top-[80%] left-[20%] w-[35vw] h-[35vw] rounded-full bg-primary-fixed/3 blur-[120px] pointer-events-none animate-float-slow z-0"></div>
+      <div className="absolute top-[10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-primary-fixed/[0.18] blur-[120px] pointer-events-none animate-float-slow z-0"></div>
+      <div className="absolute top-[50%] right-[-15%] w-[45vw] h-[45vw] rounded-full bg-secondary-container/[0.15] blur-[150px] pointer-events-none animate-float-reverse z-0"></div>
+      <div className="absolute top-[80%] left-[20%] w-[35vw] h-[35vw] rounded-full bg-primary-fixed/[0.10] blur-[120px] pointer-events-none animate-float-slow z-0"></div>
 
       <Navbar config={config} />
       <main className="relative z-10">

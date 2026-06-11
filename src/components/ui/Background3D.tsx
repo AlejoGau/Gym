@@ -56,18 +56,37 @@ export default function Background3D({ config }: Background3DProps) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     // 4. Initialize Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.15);
+    // Increased ambient light for better overall visibility
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
     const primaryColor = new THREE.Color(config.primary);
     const secondaryColor = new THREE.Color(config.secondary);
+    const accentColor = new THREE.Color(config.accent);
+
+    // Dynamic adjustment to guarantee particles are visible even if button text is dark
+    const accentHSL = { h: 0, s: 0, l: 0 };
+    accentColor.getHSL(accentHSL);
+    if (accentHSL.l < 0.4) {
+      accentColor.setHSL(accentHSL.h, Math.max(accentHSL.s, 0.8), 0.6);
+    }
+
+    // Directional light to hit the metallic surfaces and plates
+    const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    dirLight.position.set(5, 8, 5);
+    scene.add(dirLight);
+
+    // Focused light close to the dumbbell
+    const dumbbellLight = new THREE.PointLight(0xffffff, 30, 15);
+    dumbbellLight.position.set(3, 2, 4);
+    scene.add(dumbbellLight);
 
     // Glowing dynamic point lights
-    const pointLight = new THREE.PointLight(primaryColor, 180, 50);
+    const pointLight = new THREE.PointLight(primaryColor, 200, 50);
     pointLight.position.set(6, 4, 6);
     scene.add(pointLight);
 
-    const pointLight2 = new THREE.PointLight(secondaryColor, 100, 40);
+    const pointLight2 = new THREE.PointLight(secondaryColor, 120, 40);
     pointLight2.position.set(-6, -4, 4);
     scene.add(pointLight2);
 
@@ -78,30 +97,27 @@ export default function Background3D({ config }: Background3DProps) {
     const handleGeom = new THREE.CylinderGeometry(0.1, 0.1, 2.4, 16);
     handleGeom.rotateZ(Math.PI / 2); // Orient horizontally
     const handleMat = new THREE.MeshStandardMaterial({
-      color: 0xdddddd,
-      metalness: 0.9,
-      roughness: 0.15,
+      color: 0xf0f0f2,
+      metalness: 0.95,
+      roughness: 0.08,
       bumpScale: 0.05
     });
     const handleMesh = new THREE.Mesh(handleGeom, handleMat);
     dumbbellGroup.add(handleMesh);
 
-    // Weight Plates Materials (Matte Dark Steel and Glowing Brand Accents)
+    // Weight Plates Materials (Lighter Metallic Grey for maximum visibility and dynamic glows)
     const plateMat = new THREE.MeshStandardMaterial({
-      color: 0x1f1f1f,
-      metalness: 0.7,
-      roughness: 0.4
+      color: 0x3d3d40,
+      metalness: 0.85,
+      roughness: 0.2
     });
 
-    const glowRingMat = new THREE.MeshPhysicalMaterial({
+    const glowRingMat = new THREE.MeshStandardMaterial({
       color: primaryColor,
-      roughness: 0.1,
-      metalness: 0.1,
-      transmission: 0.8,
-      thickness: 0.5,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.7
+      emissive: primaryColor,
+      emissiveIntensity: 2.2,
+      roughness: 0.15,
+      metalness: 0.8
     });
 
     // Assembling Weight Plates on Left and Right Ends
@@ -191,10 +207,10 @@ export default function Background3D({ config }: Background3DProps) {
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
-      color: primaryColor,
-      size: 0.08,
+      color: accentColor,
+      size: 0.10,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.65,
       blending: THREE.AdditiveBlending,
       depthWrite: false
     });
@@ -310,7 +326,7 @@ export default function Background3D({ config }: Background3DProps) {
       {webGlSupported ? (
         <canvas 
           ref={canvasRef} 
-          className="absolute inset-0 w-full h-full block z-10 opacity-65"
+          className="absolute inset-0 w-full h-full block z-10 opacity-95"
         />
       ) : (
         // Static background fallback if WebGL is unavailable
