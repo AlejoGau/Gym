@@ -13,6 +13,7 @@ import Testimonials from '@/components/landing/Testimonials';
 import Location from '@/components/landing/Location';
 import ContactCTA from '@/components/landing/ContactCTA';
 import Footer from '@/components/landing/Footer';
+import Background3D from '@/components/ui/Background3D';
 
 
 // Helper to parse hex colors to rgb for use in transparency gradients
@@ -47,6 +48,9 @@ export default function GymConfigWrapper() {
 
   return (
     <div className="w-full relative min-h-screen bg-background text-on-background overflow-hidden">
+      {/* 3D scrolling parallax background grid and elements */}
+      <Background3D />
+
       {/* 3D ambient light background blobs */}
       <div className="absolute top-[10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-primary-fixed/5 blur-[120px] pointer-events-none animate-float-slow z-0"></div>
       <div className="absolute top-[50%] right-[-15%] w-[45vw] h-[45vw] rounded-full bg-secondary-container/5 blur-[150px] pointer-events-none animate-float-reverse z-0"></div>
