@@ -178,6 +178,149 @@ export default function Background3D({ config }: Background3DProps) {
     rightCollar.position.x = 0.45;
     dumbbellGroup.add(rightCollar);
 
+    // 5b. Create Brand Caps on the Flat Ends of the Dumbbell Plates
+    const capCanvas = document.createElement('canvas');
+    capCanvas.width = 256;
+    capCanvas.height = 256;
+    const capCtx = capCanvas.getContext('2d');
+
+    const drawBrandCap = (img?: HTMLImageElement) => {
+      if (!capCtx) return;
+
+      // Dark steel plate background
+      capCtx.fillStyle = '#222224';
+      capCtx.beginPath();
+      capCtx.arc(128, 128, 128, 0, Math.PI * 2);
+      capCtx.fill();
+
+      // Sleek dynamic brand primary border ring
+      capCtx.strokeStyle = config.primary;
+      capCtx.lineWidth = 10;
+      capCtx.beginPath();
+      capCtx.arc(128, 128, 118, 0, Math.PI * 2);
+      capCtx.stroke();
+
+      // Subtle inner light ring
+      capCtx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      capCtx.lineWidth = 3;
+      capCtx.beginPath();
+      capCtx.arc(128, 128, 106, 0, Math.PI * 2);
+      capCtx.stroke();
+
+      // Center Brand Content
+      if (img) {
+        // Center the uploaded brand logo image
+        const maxDim = 120;
+        let w = img.width;
+        let h = img.height;
+        if (w > h) {
+          h = Math.round((h * maxDim) / w);
+          w = maxDim;
+        } else {
+          w = Math.round((w * maxDim) / h);
+          h = maxDim;
+        }
+        const x = 128 - w / 2;
+        const y = 128 - h / 2;
+        capCtx.drawImage(img, x, y, w, h);
+      } else {
+        // Fallback Vector designs for presets or dynamic initials emblem
+        const logoLower = (config.logo || '').toLowerCase();
+        if (logoLower === 'bolt' || !logoLower) {
+          // Rayo (Bolt) Vector path
+          capCtx.fillStyle = config.primary;
+          capCtx.beginPath();
+          capCtx.moveTo(128, 55);
+          capCtx.lineTo(92, 134);
+          capCtx.lineTo(122, 134);
+          capCtx.lineTo(112, 201);
+          capCtx.lineTo(164, 122);
+          capCtx.lineTo(134, 122);
+          capCtx.closePath();
+          capCtx.fill();
+        } else if (logoLower === 'fitness_center') {
+          // Mancuerna (Dumbbell) Vector path
+          capCtx.fillStyle = '#ffffff';
+          capCtx.fillRect(90, 108, 12, 40); // left plate
+          capCtx.fillRect(154, 108, 12, 40); // right plate
+          capCtx.fillRect(102, 124, 52, 8); // handle bar
+          // small inner plates
+          capCtx.fillStyle = config.primary;
+          capCtx.fillRect(102, 114, 6, 28);
+          capCtx.fillRect(148, 114, 6, 28);
+        } else if (logoLower === 'shield') {
+          // Escudo (Shield) Vector path
+          capCtx.fillStyle = config.primary;
+          capCtx.beginPath();
+          capCtx.moveTo(128, 65);
+          capCtx.lineTo(165, 65);
+          capCtx.quadraticCurveTo(165, 128, 128, 182);
+          capCtx.quadraticCurveTo(91, 128, 91, 65);
+          capCtx.closePath();
+          capCtx.fill();
+          // Inner dot
+          capCtx.fillStyle = '#ffffff';
+          capCtx.beginPath();
+          capCtx.arc(128, 115, 12, 0, Math.PI * 2);
+          capCtx.fill();
+        } else if (logoLower === 'monitoring') {
+          // Cardio (Heartbeat) Vector path
+          capCtx.strokeStyle = config.primary;
+          capCtx.lineWidth = 8;
+          capCtx.beginPath();
+          capCtx.moveTo(70, 128);
+          capCtx.lineTo(100, 128);
+          capCtx.lineTo(112, 90);
+          capCtx.lineTo(128, 170);
+          capCtx.lineTo(140, 110);
+          capCtx.lineTo(152, 136);
+          capCtx.lineTo(164, 128);
+          capCtx.lineTo(186, 128);
+          capCtx.stroke();
+        } else {
+          // Fallback to gym initials (e.g. "FF")
+          const initials = config.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+          capCtx.fillStyle = '#ffffff';
+          capCtx.font = 'bold 74px Montserrat, sans-serif';
+          capCtx.textAlign = 'center';
+          capCtx.textBaseline = 'middle';
+          capCtx.fillText(initials, 128, 128);
+        }
+      }
+    };
+
+    const brandTexture = new THREE.CanvasTexture(capCanvas);
+
+    if (config.logo && (config.logo.startsWith('http') || config.logo.startsWith('/') || config.logo.includes('.') || config.logo.startsWith('data:image'))) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        drawBrandCap(img);
+        brandTexture.needsUpdate = true;
+      };
+      img.src = config.logo;
+    } else {
+      drawBrandCap();
+      brandTexture.needsUpdate = true;
+    }
+
+    const capGeom = new THREE.CircleGeometry(0.74, 32);
+    const capMat = new THREE.MeshStandardMaterial({
+      map: brandTexture,
+      metalness: 0.85,
+      roughness: 0.2
+    });
+
+    const leftCap = new THREE.Mesh(capGeom, capMat);
+    leftCap.position.x = -1.01;
+    leftCap.rotateY(-Math.PI / 2);
+    dumbbellGroup.add(leftCap);
+
+    const rightCap = new THREE.Mesh(capGeom, capMat);
+    rightCap.position.x = 1.01;
+    rightCap.rotateY(Math.PI / 2);
+    dumbbellGroup.add(rightCap);
+
     // Place the Dumbbell Group in the scene (right-aligned in Hero section on desktop)
     const updateDumbbellPosition = (widthVal: number) => {
       if (widthVal < 768) {
@@ -307,6 +450,7 @@ export default function Background3D({ config }: Background3DProps) {
       plateGeometries.forEach(g => g.dispose());
       ringGeom.dispose();
       collarGeom.dispose();
+      capGeom.dispose();
       particlesGeometry.dispose();
 
       // Dispose Materials
@@ -314,7 +458,11 @@ export default function Background3D({ config }: Background3DProps) {
       plateMat.dispose();
       glowRingMat.dispose();
       collarMat.dispose();
+      capMat.dispose();
       particlesMaterial.dispose();
+
+      // Dispose Texture
+      brandTexture.dispose();
       
       renderer.dispose();
     };
