@@ -2,6 +2,13 @@
 
 import { GymConfig } from '@/lib/config';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+import HeroCssBackground from './HeroCssBackground';
+
+const Hero3DBackground = dynamic(() => import('./Hero3DBackground'), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-[#131313] z-0" />,
+});
 
 interface HeroProps {
   config: GymConfig;
@@ -35,18 +42,8 @@ export default function Hero({ config }: HeroProps) {
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#131313]">
-      {/* Background image & gradient overlay */}
-      <div className="absolute inset-0 z-0">
-        <motion.img
-          initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.4 }}
-          transition={{ duration: 1.8, ease: 'easeOut' }}
-          alt={`Hero for ${config.name}`}
-          className="w-full h-full object-cover grayscale"
-          src={config.image}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-      </div>
+      {/* 3D WebGL Background with dynamic import and fallback */}
+      <Hero3DBackground config={config} />
 
       {/* Hero Content */}
       <motion.div 
