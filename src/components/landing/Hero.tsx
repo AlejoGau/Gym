@@ -2,13 +2,6 @@
 
 import { GymConfig } from '@/lib/config';
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import HeroCssBackground from './HeroCssBackground';
-
-const Hero3DBackground = dynamic(() => import('./Hero3DBackground'), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 bg-[#131313] z-0" />,
-});
 
 interface HeroProps {
   config: GymConfig;
@@ -41,9 +34,8 @@ export default function Hero({ config }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#131313]">
-      {/* 3D WebGL Background with dynamic import and fallback */}
-      <Hero3DBackground config={config} />
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-transparent">
+      {/* Note: The global Background3D renders the WebGL 3D dumbbell and particles behind this section */}
 
       {/* Hero Content */}
       <motion.div 
