@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { GymConfig } from '@/lib/config';
+import { motion } from 'framer-motion';
 
 interface ContactCTAProps {
   config: GymConfig;
@@ -29,10 +30,22 @@ export default function ContactCTA({ config }: ContactCTAProps) {
   return (
     <section className="py-20 relative overflow-hidden" id="contacto">
       {/* Dynamic skewed color block background */}
-      <div className="absolute inset-0 bg-primary-fixed -skew-y-3 translate-y-32 z-0"></div>
+      <motion.div 
+        initial={{ opacity: 0, y: 150 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="absolute inset-0 bg-primary-fixed -skew-y-3 translate-y-32 z-0"
+      ></motion.div>
       
       <div className="relative z-10 max-w-4xl mx-auto px-container-margin-mobile">
-        <div className="bg-surface-container-highest p-8 md:p-12 rounded-2xl border border-white/5 shadow-2xl">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, y: 35 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 15 }}
+          className="bg-surface-container-highest p-8 md:p-12 rounded-2xl border border-white/5 shadow-2xl backdrop-blur-md"
+        >
           <div className="text-center mb-10">
             <h2 className="font-headline-lg text-[32px] text-white mb-2 font-bold uppercase tracking-tight">
               ¿LISTO PARA EMPEZAR?
@@ -48,7 +61,8 @@ export default function ContactCTA({ config }: ContactCTAProps) {
               <label className="text-xs font-bold text-primary-fixed uppercase tracking-wider ml-1">
                 Nombre Completo
               </label>
-              <input
+              <motion.input
+                whileFocus={{ scale: 1.01 }}
                 type="text"
                 required
                 value={name}
@@ -63,7 +77,8 @@ export default function ContactCTA({ config }: ContactCTAProps) {
               <label className="text-xs font-bold text-primary-fixed uppercase tracking-wider ml-1">
                 WhatsApp / Teléfono
               </label>
-              <input
+              <motion.input
+                whileFocus={{ scale: 1.01 }}
                 type="tel"
                 required
                 value={phone}
@@ -78,7 +93,8 @@ export default function ContactCTA({ config }: ContactCTAProps) {
               <label className="text-xs font-bold text-primary-fixed uppercase tracking-wider ml-1">
                 Objetivo Personal
               </label>
-              <select
+              <motion.select
+                whileFocus={{ scale: 1.01 }}
                 value={goal}
                 onChange={(e) => setGoal(e.target.value)}
                 className="w-full bg-background border border-outline-variant text-white rounded-lg p-4 focus:ring-2 focus:ring-primary-fixed focus:border-primary-fixed outline-none transition-all appearance-none cursor-pointer"
@@ -87,20 +103,22 @@ export default function ContactCTA({ config }: ContactCTAProps) {
                 <option value="Pérdida de Peso">Pérdida de Peso</option>
                 <option value="Resistencia HIIT">Resistencia HIIT</option>
                 <option value="Flexibilidad y Yoga">Flexibilidad y Yoga</option>
-              </select>
+              </motion.select>
             </div>
             
             {/* Submit CTA */}
             <div className="md:col-span-2 mt-4">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-5 bg-primary-fixed text-on-primary-fixed font-black text-lg rounded-lg uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95 shadow-[0_10px_20px_rgba(var(--color-primary),0.2)] hover:brightness-110 cursor-pointer"
+                className="w-full py-5 bg-primary-fixed text-on-primary-fixed font-black text-lg rounded-lg uppercase tracking-widest transition-all hover:brightness-110 cursor-pointer shadow-[0_10px_25px_-5px_rgba(var(--color-primary-rgb),0.3)]"
               >
                 QUIERO EMPEZAR
-              </button>
+              </motion.button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

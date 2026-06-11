@@ -1,6 +1,8 @@
 'use client';
 
 import { GymConfig } from '@/lib/config';
+import { motion } from 'framer-motion';
+import Card3D from '@/components/ui/Card3D';
 
 interface ActivitiesProps {
   config: GymConfig;
@@ -30,32 +32,68 @@ export default function Activities({ config }: ActivitiesProps) {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 40, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 90, damping: 14 } as const,
+    },
+  };
+
   return (
-    <section className="py-20 bg-surface-container-lowest" id="clases">
+    <section className="py-20 bg-surface-container-lowest overflow-hidden" id="clases">
       <div className="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
-        <h2 className="font-headline-lg text-[32px] mb-12 text-white border-l-4 border-primary-fixed pl-4 font-bold tracking-tight uppercase">
+        <motion.h2 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="font-headline-lg text-[32px] mb-12 text-white border-l-4 border-primary-fixed pl-4 font-bold tracking-tight uppercase"
+        >
           NUESTRAS DISCIPLINAS
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        </motion.h2>
+        
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
           {disciplines.map((discipline, idx) => (
-            <div key={idx} className="relative group h-[400px] overflow-hidden rounded-xl">
-              <img
-                alt={discipline.name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                src={discipline.image}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
-              <div className="absolute bottom-6 left-6 z-10">
-                <h4 className="font-headline-md text-[24px] font-bold text-white mb-1">
-                  {discipline.name}
-                </h4>
-                <span className="text-primary-fixed font-label-md uppercase font-bold tracking-wider">
-                  {discipline.category}
-                </span>
-              </div>
-            </div>
+            <motion.div key={idx} variants={itemVariants}>
+              <Card3D className="h-[400px]">
+                <div className="relative group h-full overflow-hidden rounded-xl bg-surface-variant/30 border border-white/5 shadow-xl">
+                  <img
+                    alt={discipline.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={discipline.image}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-85"></div>
+                  <div className="absolute bottom-6 left-6 z-10" style={{ transform: 'translateZ(10px)' }}>
+                    <h4 className="font-headline-md text-[24px] font-bold text-white mb-1">
+                      {discipline.name}
+                    </h4>
+                    <span className="text-primary-fixed font-label-md uppercase font-bold tracking-wider">
+                      {discipline.category}
+                    </span>
+                  </div>
+                </div>
+              </Card3D>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

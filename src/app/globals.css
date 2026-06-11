@@ -66,6 +66,47 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* 3D Glassmorphism Card with Dynamic Hover Glowing */
+.glass-card-3d {
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.glass-card-3d:hover {
+  border-color: rgba(var(--color-primary-rgb), 0.35);
+  box-shadow: 0 15px 40px -10px rgba(var(--color-primary-rgb), 0.2),
+              0 0 25px -5px rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* Floating animation for ambient light blobs */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-40px) scale(1.15);
+  }
+}
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0) scale(1.1);
+  }
+  50% {
+    transform: translateY(30px) scale(0.95);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 15s ease-in-out infinite;
+}
+.animate-float-reverse {
+  animation: float-reverse 18s ease-in-out infinite;
+}
+
+
 /* Dynamic outline/text stroke style */
 .text-stroke {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);

@@ -1,6 +1,8 @@
 'use client';
 
 import { GymConfig } from '@/lib/config';
+import { motion } from 'framer-motion';
+import Card3D from '@/components/ui/Card3D';
 
 interface TestimonialsProps {
   config: GymConfig;
@@ -28,37 +30,73 @@ export default function Testimonials({ config }: TestimonialsProps) {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 40, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 90, damping: 14 } as const,
+    },
+  };
+
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
-        <h2 className="font-headline-lg text-[32px] text-white mb-16 text-center font-bold tracking-tight uppercase">
+        <motion.h2 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="font-headline-lg text-[32px] text-white mb-16 text-center font-bold tracking-tight uppercase"
+        >
           LO QUE DICEN NUESTROS ATLETAS
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        </motion.h2>
+        
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
           {reviews.map((review, idx) => (
-            <div key={idx} className="glass-card p-8 rounded-xl relative flex flex-col justify-between">
-              <span className="material-symbols-outlined text-primary-fixed/20 text-[64px] absolute top-4 right-4 select-none pointer-events-none">
-                format_quote
-              </span>
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <img
-                    alt={review.name}
-                    className="w-12 h-12 rounded-full object-cover grayscale border border-white/10"
-                    src={review.image}
-                  />
+            <motion.div key={idx} variants={itemVariants} className="h-full">
+              <Card3D className="h-full">
+                <div className="glass-card-3d p-8 rounded-xl relative flex flex-col justify-between h-full bg-surface-container/20 backdrop-blur-xl border border-white/5 shadow-xl">
+                  <span className="material-symbols-outlined text-primary-fixed/10 text-[64px] absolute top-4 right-4 select-none pointer-events-none">
+                    format_quote
+                  </span>
                   <div>
-                    <p className="font-bold text-white text-[16px]">{review.name}</p>
-                    <p className="text-[12px] font-bold text-primary-fixed uppercase tracking-wider">{review.discipline}</p>
+                    <div className="flex items-center gap-4 mb-6">
+                      <img
+                        alt={review.name}
+                        className="w-12 h-12 rounded-full object-cover grayscale border border-white/10"
+                        src={review.image}
+                      />
+                      <div>
+                        <p className="font-bold text-white text-[16px]">{review.name}</p>
+                        <p className="text-[12px] font-bold text-primary-fixed uppercase tracking-wider">{review.discipline}</p>
+                      </div>
+                    </div>
+                    <p className="italic text-on-surface-variant leading-relaxed">
+                      "{review.quote}"
+                    </p>
                   </div>
                 </div>
-                <p className="italic text-on-surface-variant leading-relaxed">
-                  "{review.quote}"
-                </p>
-              </div>
-            </div>
+              </Card3D>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
