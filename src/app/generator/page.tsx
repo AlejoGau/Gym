@@ -62,11 +62,17 @@ export default function GeneratorPage() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-6">
-          <span className="material-symbols-outlined text-primary-fixed text-[36px] animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>
-            settings_suggest
-          </span>
+          <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
+            {logo && (logo.startsWith('http') || logo.startsWith('/') || logo.includes('.')) ? (
+              <img src={logo} alt={name} className="max-w-full max-h-full p-1.5 object-contain" />
+            ) : (
+              <span className="material-symbols-outlined text-primary-fixed text-[30px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+                {logo || 'bolt'}
+              </span>
+            )}
+          </div>
           <div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">GENERADOR DE DEMOS</h1>
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">GENERADOR DE DEMOS: {name || 'GYM'}</h1>
             <p className="text-on-surface-variant text-sm mt-1">Crea enlaces personalizados para cada gimnasio en segundos.</p>
           </div>
         </div>
@@ -147,16 +153,69 @@ export default function GeneratorPage() {
                 />
               </div>
 
-              {/* Logo URL */}
-              <div className="space-y-2 sm:col-span-2">
-                <label className="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">URL del Logo (Opcional - Imagen transparente)</label>
-                <input
-                  type="text"
-                  value={logo}
-                  onChange={(e) => setLogo(e.target.value)}
-                  placeholder="Ej: https://tudominio.com/logo.png"
-                  className="w-full bg-[#121212] border border-white/10 text-white rounded-lg p-3 focus:ring-1 focus:ring-primary-fixed focus:border-primary-fixed outline-none text-sm"
-                />
+              {/* Logo Selector & URL Input */}
+              <div className="space-y-3 sm:col-span-2 bg-[#121212] p-4 rounded-lg border border-white/5">
+                <label className="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">Logo o Ícono de la Marca</label>
+                
+                {/* Preset Icons Selector */}
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {[
+                    { id: 'bolt', label: 'Rayo', icon: 'bolt' },
+                    { id: 'fitness_center', label: 'Mancuerna', icon: 'fitness_center' },
+                    { id: 'shield', label: 'Escudo', icon: 'shield' },
+                    { id: 'monitoring', label: 'Cardio', icon: 'monitoring' },
+                    { id: 'emoji_events', label: 'Trofeo', icon: 'emoji_events' },
+                    { id: 'sports_martial_arts', label: 'Combate', icon: 'sports_martial_arts' }
+                  ].map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      onClick={() => setLogo(preset.id)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold transition-all cursor-pointer ${
+                        logo === preset.id
+                          ? 'bg-primary-fixed text-on-primary-fixed border-primary-fixed shadow-[0_0_10px_rgba(0,0,0,0.5)]'
+                          : 'border-white/10 hover:bg-white/5 text-on-surface-variant hover:text-white'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-[16px]">{preset.icon}</span>
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Custom URL Input & Real-Time Preview */}
+                <div className="flex flex-col sm:flex-row gap-4 items-center">
+                  <div className="flex-1 w-full">
+                    <input
+                      type="text"
+                      value={logo}
+                      onChange={(e) => setLogo(e.target.value)}
+                      placeholder="Escribe un ícono de material (ej: bolt, fitness_center) o pega una URL de imagen..."
+                      className="w-full bg-[#1e1e1e] border border-white/10 text-white rounded-lg p-3 focus:ring-1 focus:ring-primary-fixed focus:border-primary-fixed outline-none text-sm"
+                    />
+                  </div>
+
+                  {/* Real-time logo preview box */}
+                  <div className="w-12 h-12 rounded-lg bg-[#121212] border border-white/10 flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+                    {logo && (logo.startsWith('http') || logo.startsWith('/') || logo.includes('.')) ? (
+                      <img
+                        src={logo}
+                        alt="Preview"
+                        className="max-w-full max-h-full p-2 object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
+                      />
+                    ) : (
+                      <span className="material-symbols-outlined text-primary-fixed text-[24px]">
+                        {logo || 'bolt'}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                  Puedes hacer clic en uno de los íconos rápidos, escribir el nombre de cualquier ícono de Google Material, o pegar una URL de imagen PNG/SVG transparente.
+                </p>
               </div>
 
               {/* Hero Image URL */}
