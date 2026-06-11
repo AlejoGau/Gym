@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dynamic custom colors mapped to configuration variables */
+  --color-primary-fixed: var(--color-primary);
+  --color-on-primary-fixed: var(--color-accent);
+  --color-secondary-container: var(--color-secondary);
+  --color-on-secondary-container: var(--color-accent);
+  
+  /* Constant colors from the original design system */
+  --color-background: #131313;
+  --color-surface-container: #201f1f;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-highest: #353534;
+  --color-surface-variant: #353534;
+  --color-on-background: #e5e2e1;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #c5c9ac;
+  --color-outline: #8f9378;
+  --color-outline-variant: #444932;
+  
+  /* Font Families mapped to layout variables */
+  --font-display-lg: var(--font-montserrat);
+  --font-display-lg-mobile: var(--font-montserrat);
+  --font-headline-lg: var(--font-montserrat);
+  --font-headline-md: var(--font-montserrat);
+  --font-body-md: var(--font-inter);
+  --font-body-lg: var(--font-inter);
+  --font-label-md: var(--font-inter);
+  
+  /* Custom Font Sizes from DESIGN.md */
+  --text-label-md: 14px;
+  --text-display-lg-mobile: 36px;
+  --text-headline-lg: 32px;
+  --text-headline-md: 24px;
+  --text-body-md: 16px;
+  --text-display-lg: 48px;
+  --text-body-lg: 18px;
+}
+
+:root {
+  /* Dynamic values mapped to CSS variables, default values loaded here initially */
+  --color-primary: #caf300;
+  --color-secondary: #ff571a;
+  --color-accent: #171e00;
+}
+
+body {
+  background-color: #131313;
+  color: #e5e2e1;
+  overflow-x: hidden;
+  font-family: var(--font-inter), sans-serif;
+  min-height: max(884px, 100dvh);
+}
+
+/* Material Symbols configuration */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Glassmorphism card styles from DESIGN.md */
+.glass-card {
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dynamic outline/text stroke style */
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: transparent;
+}
+
+/* Custom transitions and scroll behaviors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add custom font properties that tailwind v4 theme shorthand might not include */
+.font-label-md {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.font-display-lg-mobile {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.font-display-lg {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}

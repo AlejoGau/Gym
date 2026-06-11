@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FORGE FITNESS | Entrenamiento de Élite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#521300",
+                    "secondary-container": "#ff571a",
+                    "on-surface-variant": "#c5c9ac",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#536600",
+                    "tertiary": "#ffffff",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-container": "#596c00",
+                    "primary-fixed": "#caf300",
+                    "primary": "#ffffff",
+                    "surface-variant": "#353534",
+                    "surface-tint": "#b0d500",
+                    "secondary": "#ffb59e",
+                    "tertiary-fixed-dim": "#b1cad7",
+                    "secondary-fixed-dim": "#ffb59e",
+                    "on-error-container": "#ffdad6",
+                    "background": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#324a54",
+                    "primary-fixed-dim": "#b0d500",
+                    "on-primary-fixed-variant": "#3e4c00",
+                    "on-primary": "#2a3400",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#353534",
+                    "on-background": "#e5e2e1",
+                    "surface-container": "#201f1f",
+                    "on-primary-fixed": "#171e00",
+                    "error-container": "#93000a",
+                    "outline": "#8f9378",
+                    "on-secondary-fixed": "#3a0b00",
+                    "on-tertiary-container": "#506873",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary-fixed": "#041e28",
+                    "outline-variant": "#444932",
+                    "tertiary-container": "#cde7f3",
+                    "on-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-fixed-variant": "#852400",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed": "#ffdbd0",
+                    "surface-bright": "#393939",
+                    "primary-container": "#caf300",
+                    "tertiary-fixed": "#cde7f3",
+                    "surface": "#131313",
+                    "on-tertiary": "#1b343d",
+                    "surface-dim": "#131313",
+                    "on-secondary": "#5e1700"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "lg": "48px",
+                    "gutter": "24px",
+                    "container-margin-mobile": "20px",
+                    "md": "24px",
+                    "xl": "80px",
+                    "container-margin-desktop": "120px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display-lg-mobile": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(202, 243, 0, 0.3);
+            color: transparent;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10">
+<div class="flex justify-between items-center px-container-margin-mobile h-16 w-full max-w-7xl mx-auto md:px-12">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-display-lg text-[24px] md:text-display-lg tracking-tighter text-primary-fixed">FORGE FITNESS</span>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-primary-fixed font-label-md text-label-md hover:text-primary-fixed transition-colors" href="#">Inicio</a>
+<a class="text-on-background font-label-md text-label-md hover:text-primary-fixed transition-colors" href="#clases">Clases</a>
+<a class="text-on-background font-label-md text-label-md hover:text-primary-fixed transition-colors" href="#planes">Planes</a>
+<a class="text-on-background font-label-md text-label-md hover:text-primary-fixed transition-colors" href="#sedes">Sedes</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-background">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<a class="hidden md:block bg-primary-fixed text-on-primary-fixed px-6 py-2 rounded-lg font-bold uppercase transition-transform active:scale-95" href="#contacto">UNIRSE</a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Hero Fitness" class="w-full h-full object-cover opacity-40 grayscale" data-alt="A powerful action shot of a high-performance athlete in a dark, moody industrial gym setting. The lighting is cinematic, with strong rim lights highlighting muscle definition against a deep charcoal background. Hints of electric lime neon tubes reflect off metallic surfaces, creating a premium and intense atmosphere. The style is gritty yet polished, evoking elite discipline and athletic excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB64ebsGZ8sq4OWraakR-CsgiqZbqfmLpPzS3gk24a9kuow-I7A_d9r-KK4BvKqzPTrGikRVdGyX0P4PieKex0V-tz7v-Xz5wIGUPiXKb-T0yqFyZ0NLWpWqcwM5Wr7qZTzG1N1aa5T1rYb3e8ElOMS2HSmhS0M1aU8aEjmZqD339__xmNSHaV4B30EyDRApbjdV-FhGyJSL4XEx2hPoqnic9B6m7ACv9DC_59UKHtkXQMzmrsENSizby0faSaKYMqMCaBaoAT8wBU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-7xl mx-auto px-container-margin-mobile md:px-12 flex flex-col items-start">
+<div class="flex gap-sm mb-6">
+<span class="bg-surface-variant/50 border border-primary-fixed/30 px-4 py-1 rounded-full text-primary-fixed text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Clase Gratis
+                </span>
+<span class="bg-surface-variant/50 border border-primary-fixed/30 px-4 py-1 rounded-full text-primary-fixed text-label-md font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span> Sin Contrato
+                </span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-[80px] leading-[0.9] mb-4 text-white italic">
+                ENTRENÁ AL <br/><span class="text-primary-fixed not-italic">LÍMITE</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-xl">
+                Elevá tu rendimiento con equipamiento de élite y coaching personalizado en el corazón de Palermo. Tu mejor versión empieza acá.
+            </p>
+<div class="flex flex-col sm:flex-row gap-md w-full sm:w-auto">
+<a class="bg-primary-fixed text-on-primary-fixed px-10 py-4 rounded-lg font-bold uppercase text-center flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95" href="#">
+                    WhatsApp <span class="material-symbols-outlined">send</span>
+</a>
+<a class="border-2 border-primary-fixed text-primary-fixed px-10 py-4 rounded-lg font-bold uppercase text-center transition-all hover:bg-primary-fixed hover:text-on-primary-fixed" href="#planes">
+                    Ver Planes
+                </a>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="py-xl relative z-10 bg-background">
+<div class="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Benefit 1 -->
+<div class="glass-card p-lg rounded-xl transition-all hover:-translate-y-2">
+<span class="material-symbols-outlined text-primary-fixed text-[48px] mb-md" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<h3 class="font-headline-md text-headline-md text-primary-fixed mb-sm">Professional Coaches</h3>
+<p class="text-on-surface-variant">Atletas certificados dedicados a optimizar cada uno de tus movimientos para resultados reales.</p>
+</div>
+<!-- Benefit 2 -->
+<div class="glass-card p-lg rounded-xl transition-all hover:-translate-y-2">
+<span class="material-symbols-outlined text-primary-fixed text-[48px] mb-md" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+<h3 class="font-headline-md text-headline-md text-primary-fixed mb-sm">Elite Equipment</h3>
+<p class="text-on-surface-variant">Maquinaria de última generación importada. La tecnología al servicio de tu fuerza y resistencia.</p>
+</div>
+<!-- Benefit 3 -->
+<div class="glass-card p-lg rounded-xl transition-all hover:-translate-y-2">
+<span class="material-symbols-outlined text-primary-fixed text-[48px] mb-md" style="font-variation-settings: 'FILL' 1;">groups</span>
+<h3 class="font-headline-md text-headline-md text-primary-fixed mb-sm">Community</h3>
+<p class="text-on-surface-variant">Un entorno de alta energía donde la disciplina y el compañerismo forjan a los mejores.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Activities Grid -->
+<section class="py-xl bg-surface-container-lowest" id="clases">
+<div class="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
+<h2 class="font-headline-lg text-headline-lg mb-lg text-white border-l-4 border-primary-fixed pl-4">NUESTRAS DISCIPLINAS</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card Musculacion -->
+<div class="relative group h-[400px] overflow-hidden rounded-xl">
+<img alt="Musculación" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A focused close-up of a bodybuilder lifting heavy iron plates in a high-contrast dark gym setting. Dust particles caught in dramatic spotlight rays create a sense of texture. The overall color palette is dominated by deep grays and blacks with a vibrant electric lime accent on the athlete's apparel, emphasizing a premium athletic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuHI5W8HjxOg5HBAfBIOQ1jdpSB_cqUykqpKgUljniAB-095WLaX29IulN19ENXq-bQCqGhqeRfqA5xN2hW54v6fBTa8rr9eCYx8dSKD1Ij0NCtLi1g1srzVhXO_h1-GJiZqlrE0Tf8Cbppyn0P9qqI30PqVw8FcIVJc3mrfbzuOeXhlpfOEpu2VG5lKjNlZPtbIbkn0QHpieDNmuZzL0mZwlrElDQ8T_7mdYJB0U6AsfODsTSrk550Vk3P-Vr2BBznnk8ZtulkiI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="font-headline-md text-headline-md text-white">Musculación</h4>
+<span class="text-primary-fixed font-label-md">Fuerza Pura</span>
+</div>
+</div>
+<!-- Card Cross Training -->
+<div class="relative group h-[400px] overflow-hidden rounded-xl">
+<img alt="Cross Training" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A dynamic shot of a person performing a high-intensity battle rope workout. Sweat is visible under the intense overhead studio lighting. The background is a minimalist black concrete gym floor. High-contrast editing highlights the athlete's power, following the elite and disciplined brand personality with energetic lime color highlights in the distance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo0FePDhMglik5ZutfyoDuYTCrYsexyfz00hv6Bc6C3LvHbtFihtXNbqDFO_4Wnx7De_7V1MrV_xSGoITxZBNiPaJ2EsbqTIj51Q38MjH4gH4vU2Caw-3sTwH9blRYVOfHw885-X_stawhgC-tssKltrU33wcH6s0IO00_zq-O0Q_v24xyu6XBRjOHCNPXvOw4ge_bSU-wouMQPJYSxDH3DtjYGA5h1Gkmnd4pYZPQRJ3-JgclD9pHc2vzXHhcEW-O1CYugtWPqAc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="font-headline-md text-headline-md text-white">Cross Training</h4>
+<span class="text-primary-fixed font-label-md">Alto Impacto</span>
+</div>
+</div>
+<!-- Card HIIT -->
+<div class="relative group h-[400px] overflow-hidden rounded-xl">
+<img alt="HIIT" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Athletes performing rapid movements in a HIIT session. The image is desaturated with heavy dark shadows, and vibrant electric lime highlights on training gear. The setting is a luxury modern gym with polished surfaces and minimal distraction, emphasizing a focused and premium workout environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8QXy-PzD-j4znvRu00zYdL-H9Omr9FTLFUw9An62jXRr9Ex-dalwIzj8JU0rWM3msgRjohfS568V8zquAqYuDCwLgrlm3_tvjLGCXUPPNovrtOi5P-4747a_E5M7doWVpsTLf01liw8z8E_B6Zt9N0wTaHMM5XmfvPdIXkXRTICYVaWLuN44I896RkIiAaMkr0oT3rJHNCGWbjG2bs6IjWkE-fwmmsKWauDXKat9zKSEATRMCBc7HFgoKGJhAbwC4GA6pf9T2noQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="font-headline-md text-headline-md text-white">HIIT</h4>
+<span class="text-primary-fixed font-label-md">Resistencia</span>
+</div>
+</div>
+<!-- Card Yoga -->
+<div class="relative group h-[400px] overflow-hidden rounded-xl">
+<img alt="Yoga" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A serene yet powerful yoga pose in a dark studio. Soft, focused lighting creates a premium, calm atmosphere while maintaining high contrast. The athlete's form is precise, reflecting the brand's elite and disciplined identity. Subtle lime-colored lighting accents in the background provide a modern touch." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZB5zgqDDo31VJX4KZKeZKrm7G_Am6osRrKQIAkGOL9sOiOgXlddMtKCLA2BB39oG6YndviwiqHQtd1JUtb4ZtH5TFkKFKj6LWVhUCyGa0ZuzDuRD4eQqGzUkO3cdJH60QOd6L5U2-_W-US1WhQiWmZb0Sf0idE-75AEALKtPC7SFbtBUvqQfQE6jPjh4KZA6SuSs_c1TOnuIqbVLan8zRwjJ0mELozRDH5XthMwT_U4mi4g38lE-dm8GKb9jce-1WztzUYemSoHk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+<div class="absolute bottom-6 left-6">
+<h4 class="font-headline-md text-headline-md text-white">Yoga</h4>
+<span class="text-primary-fixed font-label-md">Flexibilidad</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Plans Section -->
+<section class="py-xl bg-background" id="planes">
+<div class="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-white mb-4">MEMBRESÍAS</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Seleccioná el plan que mejor se adapte a tus objetivos. Sin costos ocultos, sin contratos a largo plazo.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Plan 1 -->
+<div class="glass-card p-lg rounded-xl flex flex-col items-center text-center">
+<h3 class="font-headline-md text-headline-md text-white mb-2">Pase 3 veces</h3>
+<div class="text-primary-fixed mb-lg">
+<span class="text-body-md font-bold">$</span>
+<span class="text-[48px] font-black leading-none">25.000</span>
+<span class="text-body-md font-bold">/mes</span>
+</div>
+<ul class="space-y-4 mb-xl text-on-surface-variant text-left w-full">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> 3 sesiones semanales</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Acceso a vestuarios</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> App de seguimiento</li>
+</ul>
+<button class="w-full py-4 border border-primary-fixed text-primary-fixed rounded-lg font-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-all">ELEGIR PLAN</button>
+</div>
+<!-- Plan 2 - Featured -->
+<div class="relative glass-card p-lg rounded-xl flex flex-col items-center text-center border-2 border-primary-fixed transform md:scale-105 shadow-[0_0_40px_rgba(202,243,0,0.1)]">
+<span class="absolute -top-4 bg-primary-fixed text-on-primary-fixed px-4 py-1 rounded-full text-label-md font-bold">RECOMENDADO</span>
+<h3 class="font-headline-md text-headline-md text-white mb-2">Pase Libre</h3>
+<div class="text-primary-fixed mb-lg">
+<span class="text-body-md font-bold">$</span>
+<span class="text-[48px] font-black leading-none">38.000</span>
+<span class="text-body-md font-bold">/mes</span>
+</div>
+<ul class="space-y-4 mb-xl text-on-surface-variant text-left w-full">
+<li class="flex items-center gap-2 font-bold text-white"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Acceso ilimitado</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Todas las disciplinas</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Plan nutricional básico</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Invitado gratis (1 x mes)</li>
+</ul>
+<button class="w-full py-4 bg-primary-fixed text-on-primary-fixed rounded-lg font-bold transition-all hover:brightness-110 active:scale-95">UNIRSE AHORA</button>
+</div>
+<!-- Plan 3 -->
+<div class="glass-card p-lg rounded-xl flex flex-col items-center text-center">
+<h3 class="font-headline-md text-headline-md text-white mb-2">Personalizado</h3>
+<div class="text-primary-fixed mb-lg">
+<span class="text-body-md font-bold">$</span>
+<span class="text-[48px] font-black leading-none">55.000</span>
+<span class="text-body-md font-bold">/mes</span>
+</div>
+<ul class="space-y-4 mb-xl text-on-surface-variant text-left w-full">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Entrenador personal 1-a-1</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Evaluación bimensual</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed text-[20px]">check</span> Suplementación incluida</li>
+</ul>
+<button class="w-full py-4 border border-primary-fixed text-primary-fixed rounded-lg font-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-all">CONSULTAR</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Schedule Table -->
+<section class="py-xl bg-surface-container-lowest overflow-hidden">
+<div class="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
+<h2 class="font-headline-lg text-headline-lg text-white mb-lg text-center">HORARIOS SEMANALES</h2>
+<div class="overflow-x-auto">
+<table class="w-full min-w-[800px] border-collapse text-on-surface-variant">
+<thead>
+<tr class="bg-surface-variant/30">
+<th class="p-4 text-left font-bold text-primary-fixed">Hora</th>
+<th class="p-4 text-left font-bold">Lunes</th>
+<th class="p-4 text-left font-bold">Martes</th>
+<th class="p-4 text-left font-bold">Miércoles</th>
+<th class="p-4 text-left font-bold">Jueves</th>
+<th class="p-4 text-left font-bold">Viernes</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr>
+<td class="p-4 font-bold text-white">07:00</td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Cross Training</div></td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">HIIT</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Cross Training</div></td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">HIIT</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Cross Training</div></td>
+</tr>
+<tr>
+<td class="p-4 font-bold text-white">09:00</td>
+<td class="p-4"><div class="bg-secondary-container/20 p-2 rounded text-xs text-secondary-container">Yoga</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Musculación</div></td>
+<td class="p-4"><div class="bg-secondary-container/20 p-2 rounded text-xs text-secondary-container">Yoga</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Musculación</div></td>
+<td class="p-4"><div class="bg-secondary-container/20 p-2 rounded text-xs text-secondary-container">Yoga</div></td>
+</tr>
+<tr>
+<td class="p-4 font-bold text-white">18:00</td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">HIIT</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Cross Training</div></td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">HIIT</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Cross Training</div></td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">HIIT</div></td>
+</tr>
+<tr>
+<td class="p-4 font-bold text-white">20:00</td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Musculación</div></td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">Power HIIT</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Musculación</div></td>
+<td class="p-4"><div class="bg-primary-fixed/20 p-2 rounded text-xs text-primary-fixed">Power HIIT</div></td>
+<td class="p-4"><div class="bg-surface-variant p-2 rounded text-xs">Musculación</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-xl bg-background">
+<div class="max-w-7xl mx-auto px-container-margin-mobile md:px-12">
+<h2 class="font-headline-lg text-headline-lg text-white mb-xl text-center">LO QUE DICEN NUESTROS ATLETAS</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="glass-card p-lg rounded-xl relative">
+<span class="material-symbols-outlined text-primary-fixed/30 text-[64px] absolute top-4 right-4">format_quote</span>
+<div class="flex items-center gap-4 mb-4">
+<img alt="Student 1" class="w-12 h-12 rounded-full object-cover grayscale" data-alt="A professional, high-contrast portrait of a young athletic woman with a serious and determined expression. The lighting is soft yet highlights the contours of her face, set against a dark, out-of-focus gym background. The overall aesthetic is elite, premium, and fits perfectly within a modern dark-mode fitness interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJiMOvHJMiV28Ea1Rfi2SBcgXfyHl_ajUfuWf2DaCVFUnOlvJebcdcH4kk-wv5vjnCdz7mmh-IXjgnWH1HwXFQoEah_49lmPIF5_5OlMYIYAOz3hv066qqHR_Li3S-Zojuw4BgW9tDpC58uyuwmv4tIaSwbQOyrQrQirsciBHNMl_yJXiFO0wzil3DhRKE_e10eKoDw9OyOVvMX54PHfcjk93uQeXEKE5bGWn1nSNjgX61xLLTddlhNszriTdN5eH7RMyxlF7iugE"/>
+<div>
+<p class="font-bold text-white">Martina G.</p>
+<p class="text-xs text-primary-fixed">Atleta HIIT</p>
+</div>
+</div>
+<p class="italic text-on-surface-variant">"La energía en Forge es de otro nivel. Los profes te exigen pero te cuidan. En 3 meses vi cambios que no logré en años."</p>
+</div>
+<div class="glass-card p-lg rounded-xl relative">
+<span class="material-symbols-outlined text-primary-fixed/30 text-[64px] absolute top-4 right-4">format_quote</span>
+<div class="flex items-center gap-4 mb-4">
+<img alt="Student 2" class="w-12 h-12 rounded-full object-cover grayscale" data-alt="A portrait of a strong, fit man in his 30s with a confident and disciplined look. He is in a dark industrial space with subtle electric lime lighting accents in the background. The style is sharp and professional, emphasizing a modern athletic lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-z1Xa-nh-GFYNMQMd0yph8Z3PTZ2x9m7MwexZXx7AT9TWV_OyDeCK6e3expx425RdlgXXdzPWKp6uXwFXifjk0p509OnIdD28xG7OJlb22bHsYeHku988iGD6q5_4cdfMYSx3gQYbK6dMWZYbyH9Tl1ohb0VvYx4NPnrAZf3CcwnaQiN1kRjkZtb9SbR8dwxs17tw5am2lIb-M3tE_1xnR9nk2McVvv_6x-F_YFWBMHreQzOwpYdrOybOYDUjo8HQxSiYt8akWpI"/>
+<div>
+<p class="font-bold text-white">Julián R.</p>
+<p class="text-xs text-primary-fixed">Cross Training</p>
+</div>
+</div>
+<p class="italic text-on-surface-variant">"El equipamiento es de primera. No hay otro gym en Palermo con esta infraestructura. Altamente recomendado."</p>
+</div>
+<div class="glass-card p-lg rounded-xl relative">
+<span class="material-symbols-outlined text-primary-fixed/30 text-[64px] absolute top-4 right-4">format_quote</span>
+<div class="flex items-center gap-4 mb-4">
+<img alt="Student 3" class="w-12 h-12 rounded-full object-cover grayscale" data-alt="A portrait of a woman in athletic wear, smiling confidently with a look of achievement. The lighting is dramatic and dark, with a high-key focus on her face and athletic stance. The background is a minimalist gym interior with charcoal tones and lime accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhanEobTu3Lo9xizREtl5IH7-2ioKRvlFtkYOVl93eleT7CVmmQiw2kg4aQ4FUcjFJZcXeXEWUL1Y0edRQvybYuJuqruXcsvtVQwPFRrHi0Jvj1cAT0Wx82Fe-FxlHKdzl-uOOGy2X78yi47s5v5D8EdRdUh7S_8IpNA4jUQZZtbU4q1jDAJwKu_j4bH0usgJ-dwe_IOIjTOSqniHdyvtQAAvSp1qV942HamWzeI5VGcq_i7Hq6xsn_Euy1w1BxqkVFChMnVGn2uI"/>
+<div>
+<p class="font-bold text-white">Sofía M.</p>
+<p class="text-xs text-primary-fixed">Power Yoga</p>
+</div>
+</div>
+<p class="italic text-on-surface-variant">"Encontré un equilibrio perfecto. El ambiente es premium pero se siente como una comunidad. Forjé mi mejor versión acá."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Location & Map -->
+<section class="py-xl bg-surface-container-low" id="sedes">
+<div class="max-w-7xl mx-auto px-container-margin-mobile md:px-12 flex flex-col md:flex-row gap-xl items-center">
+<div class="w-full md:w-1/2">
+<h2 class="font-headline-lg text-headline-lg text-white mb-md uppercase italic">ENTRENÁ EN <span class="text-primary-fixed not-italic">PALERMO</span></h2>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed">location_on</span>
+<div>
+<p class="font-bold text-white">Humboldt 1550, Palermo Soho</p>
+<p class="text-on-surface-variant">CABA, Buenos Aires, Argentina.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed">schedule</span>
+<div>
+<p class="font-bold text-white">Lunes a Viernes: 06:00 a 23:00</p>
+<p class="text-on-surface-variant">Sábados: 09:00 a 18:00</p>
+</div>
+</div>
+<button class="flex items-center gap-2 bg-white text-background px-8 py-3 rounded-lg font-bold hover:bg-primary-fixed transition-colors">
+                        CÓMO LLEGAR <span class="material-symbols-outlined">directions</span>
+</button>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-[400px] bg-surface-container rounded-xl overflow-hidden grayscale contrast-125 border border-white/10 group">
+<!-- Map Placeholder -->
+<div class="w-full h-full relative">
+<img alt="Map Location" class="w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105" data-alt="A stylized, dark monochromatic map of a metropolitan city area, focusing on a neighborhood like Palermo Soho. The map features high-contrast lines and dark charcoal backgrounds with vibrant electric lime pins indicating gym locations. The aesthetic is modern, tech-forward, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMp42WutbDw4ziKBxvUH9sq18onncDfYOjDJz-0BmaS1dpn_stVbB_pbjQiHi-XeLT6_vrwhabW5YSC6U77VFDrO9d90nRCKFrHYyQ2XJ1fxctKFSiY1_70MjWeTV4X1H-Mw_kc2bDaV_H9DBiwqDH4nB5l1VcgkjyRORD8UfVM9V7Ut0yw3auvhcakYVsO3RbI7ZXt3soH-N-otZ4TYE28FyFw9SNxB-BYFi2M31xMG-qgF9A4PtGSTsSPJfhX0xfgi2TpuRyoyw"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center animate-pulse shadow-[0_0_20px_#caf300]">
+<span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 p-4 glass-card rounded-lg flex justify-between items-center">
+<span class="text-sm font-bold text-white">SEDE PALERMO SOHO</span>
+<span class="text-xs text-primary-fixed">ABIERTO AHORA</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Lead Form -->
+<section class="py-xl relative overflow-hidden" id="contacto">
+<div class="absolute inset-0 bg-primary-fixed -skew-y-3 translate-y-32 z-0"></div>
+<div class="relative z-10 max-w-4xl mx-auto px-container-margin-mobile">
+<div class="bg-surface-container-highest p-lg md:p-xl rounded-2xl border border-white/5 shadow-2xl">
+<div class="text-center mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-white mb-2">¿LISTO PARA EMPEZAR?</h2>
+<p class="text-on-surface-variant italic">Dejanos tus datos y te contactamos en menos de 1 hora.</p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-1">
+<label class="text-xs font-bold text-primary-fixed uppercase tracking-wider ml-1">Nombre Completo</label>
+<input class="w-full bg-background border-outline-variant text-white rounded-lg p-4 focus:ring-primary-fixed focus:border-primary-fixed outline-none transition-all" placeholder="Ej: Juan Pérez" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-primary-fixed uppercase tracking-wider ml-1">WhatsApp / Teléfono</label>
+<input class="w-full bg-background border-outline-variant text-white rounded-lg p-4 focus:ring-primary-fixed focus:border-primary-fixed outline-none transition-all" placeholder="Ej: +54 11 1234 5678" type="tel"/>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-xs font-bold text-primary-fixed uppercase tracking-wider ml-1">Objetivo Personal</label>
+<select class="w-full bg-background border-outline-variant text-white rounded-lg p-4 focus:ring-primary-fixed focus:border-primary-fixed outline-none transition-all">
+<option>Ganancia Muscular</option>
+<option>Pérdida de Peso</option>
+<option>Resistencia HIIT</option>
+<option>Flexibilidad y Yoga</option>
+</select>
+</div>
+<div class="md:col-span-2 mt-4">
+<button class="w-full py-5 bg-primary-fixed text-on-primary-fixed font-black text-lg rounded-lg uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95 shadow-[0_10px_20px_rgba(202,243,0,0.2)]" type="submit">
+                            QUIERO EMPEZAR
+                        </button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest pt-xl pb-32 md:pb-xl border-t border-white/5">
+<div class="max-w-7xl mx-auto px-container-margin-mobile flex flex-col items-center text-center gap-md">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-fixed text-[32px]">bolt</span>
+<span class="font-display-lg text-display-lg text-primary-fixed tracking-tighter">FORGE FITNESS</span>
+</div>
+<div class="flex flex-wrap justify-center gap-lg mb-lg">
+<a class="text-on-surface-variant font-bold hover:text-primary-fixed transition-colors" href="#">Términos</a>
+<a class="text-on-surface-variant font-bold hover:text-primary-fixed transition-colors" href="#">Privacidad</a>
+<a class="text-on-surface-variant font-bold hover:text-primary-fixed transition-colors" href="#">Contacto</a>
+<a class="text-on-surface-variant font-bold hover:text-primary-fixed transition-colors" href="#">WhatsApp</a>
+</div>
+<div class="flex gap-lg mb-lg">
+<a class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center hover:bg-primary-fixed hover:text-on-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">brand_awareness</span>
+</a>
+<a class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center hover:bg-primary-fixed hover:text-on-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">social_leaderboard</span>
+</a>
+<a class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center hover:bg-primary-fixed hover:text-on-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+<p class="text-on-surface-variant opacity-60 text-sm max-w-md">© 2024 FORGE FITNESS ARGENTINA. ENTRENAMIENTO DE ÉLITE PARA MENTES Y CUERPOS EXCEPCIONALES.</p>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container/90 backdrop-blur-lg border-t border-white/5 flex justify-around items-center px-4 pb-4 pt-2 md:hidden">
+<a class="flex flex-col items-center justify-center text-primary-fixed bg-surface-variant/50 rounded-xl px-3 py-1 tap-highlight-none active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-bright tap-highlight-none active:scale-95 transition-all" href="#clases">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Clases</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-bright tap-highlight-none active:scale-95 transition-all" href="#planes">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Planes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-bright tap-highlight-none active:scale-95 transition-all" href="#sedes">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label-md text-label-md">Sedes</span>
+</a>
+</nav>
+<!-- FAB (Contextual for joining) -->
+<a class="fixed bottom-24 right-6 z-40 md:bottom-10 md:right-10 w-16 h-16 bg-primary-fixed text-on-primary-fixed rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90 transition-all" href="#contacto">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">add</span>
+</a>
+<script>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body></html>
