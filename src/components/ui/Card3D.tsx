@@ -59,6 +59,7 @@ export default function Card3D({ children, className = '' }: Card3DProps) {
           transform: 'translateZ(15px)',
           transformStyle: 'preserve-3d',
         }}
+        className="h-full w-full"
       >
         {children}
       </div>
