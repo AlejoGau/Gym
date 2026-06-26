@@ -157,3 +157,18 @@ html {
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
+/* Demostración de ejercicio: crossfade suave entre los dos frames (inicio/fin) */
+@keyframes exercise-crossfade {
+  0%, 30% { opacity: 0; }
+  70%, 100% { opacity: 1; }
+}
+.exercise-frame-anim {
+  animation: exercise-crossfade 1.6s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .exercise-frame-anim {
+    animation: none;
+    opacity: 0;
+  }
+}
+
