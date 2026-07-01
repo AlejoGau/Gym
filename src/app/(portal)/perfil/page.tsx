@@ -39,6 +39,9 @@ export default function Page() {
       </div>
 
       <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        <Button href="/membresia" icon="credit_card">
+          Pagar cuota
+        </Button>
         <Button href="/inicio" variant="secondary" icon="arrow_back">
           Volver al inicio
         </Button>
